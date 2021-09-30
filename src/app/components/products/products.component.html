@@ -1,0 +1,64 @@
+<body>
+    <br>
+    <button class="btn btn-outline-primary" (click)="toggleForm = !toggleForm">Click to Add New Product</button>
+    <br><br>
+
+    <div class="formcontainer" *ngIf="toggleForm">
+        <form [formGroup]="productForm" (ngSubmit)="postData();">
+
+            <div class="form-group">
+                <label>Product Name : </label>
+                <input type="text" formControlName="name">
+            </div>
+            <div class="form-group">
+                <label>Product Description : </label>
+                <input type="text" formControlName="description">
+            </div>
+            <div class="form-group">
+                <label>Product Category : </label>
+                <input type="text" formControlName="category">
+            </div>
+            <div class="form-group">
+                <label>Product Units : </label>
+                <input type="integer" formControlName="units">
+            </div>
+
+            <div *ngIf="success">
+                <p style="color:green">Succesfully Added new Product</p>
+            </div>
+
+            <div *ngIf="error">
+                <p style="color:brown">Error : {{errMsg}}</p>
+            </div>
+            <div><button class="forsubmit" class="btn btn-outline-primary">Submit</button>
+                <button *ngIf="toggleForm" class="btn btn-outline-primary"
+                    (click)="toggleForm = !toggleForm">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+    <hr />
+    <div>
+        <table class="styled-table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Units</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of allProducts">
+                    <td>{{ product.id }} </td>
+                    <td>{{ product.name }} </td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.units }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>

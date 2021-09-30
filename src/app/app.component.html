@@ -1,0 +1,42 @@
+<body>
+    <div class="container" *ngIf="!_userService.token">
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-6 col-md-8 login-box">
+                <div class="col-lg-12 login-key">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                </div>
+                <div class="col-lg-12 login-title">LOG IN </div>
+                <div class="col-lg-12 login-form">
+                    <div class="col-lg-12 login-form">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-control-label">USERNAME : </label>
+                                <input type="text" name="login-username" [(ngModel)]="user.username"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">PASSWORD : </label>
+                                <input type="password" name="login-password" [(ngModel)]="user.password"
+                                    class="form-control" i>
+                            </div>
+                            <div class="col-sm-12">
+                                <span *ngFor="let error of _userService.errors.non_field_errors"
+                                    style="color: rgb(173, 110, 110);">{{ error }}<br /></span>
+                            </div>
+                            <div><button (click)="login()" class="btn btn-outline-primary">Submit</button></div>
+                            <br><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="_userService.token">
+        <div class="header">
+            <h1>Product List</h1>
+            <div><button (click)="logout()" class="btn btn-outline-primary">Log Out</button></div>
+        </div>
+        <app-products></app-products>
+    </div>
+</body>
